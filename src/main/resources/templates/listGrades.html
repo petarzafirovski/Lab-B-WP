@@ -1,0 +1,52 @@
+<th:block xmlns:th="http://www.thymeleaf.org">
+    <section>
+        <h2 style="text-align: center" th:text="${'List grades for course '} +${courseName}"></h2>
+
+        <div style="margin-top:35px;margin-bottom: 30px" th:if="${grades.size()>0}">
+            <form th:method="POST" th:action="@{'/grades/'+${courseId}+'/filtered'}">
+                <div class="row">
+                    <label for="from">Enter date from</label>
+                    <input class="form-control" required type="datetime-local" name="from" id="from">
+                </div>
+                <div class="row">
+                    <label for="to">Enter date from</label>
+                    <input class="form-control" required type="datetime-local" name="to" id="to">
+                </div>
+                <br>
+                <!--            <input type="hidden" name="courseId" th:value="${courseId}">-->
+                <button class="btn btn-primary" id="submit" type="submit" >Submit</button>
+            </form>
+        </div>
+        <hr>
+        <br>
+        <h4 th:text="'Course name:' + ${courseName}"></h4>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Student name</th>
+                <th>Grade</th>
+            </tr>
+            </thead>
+
+            <tbody th:if="${grades.size()>0}">
+            <th:block th:each="grade :${grades}">
+                <tr>
+                    <td th:text="${grade.student.getName()} + ' ' + ${grade.student.getSurname()}"></td>
+                    <td th:text="${grade.grade}"></td>
+                </tr>
+            </th:block>
+            </tbody>
+        </table>
+        <div>
+            <input type="hidden" name="courseId" th:value="${courseId}">
+            <!--    <input type="hidden" name="studentUsername" th:value="${grades.get(0).student.getUsername()}">-->
+
+            <div class="row">
+                <th:block sec:authorize="hasRole('ADMIN')">
+                    <a style="margin:10px" type="button" class="btn btn-primary" th:href="@{'/grades/' + ${courseId}+'/add/'}">Add grade</a>
+                </th:block>
+                <a style="margin:10px" type="button" class="btn btn-secondary" href="/courses">Back to courses</a>
+            </div>
+        </div>
+    </section>
+</th:block>

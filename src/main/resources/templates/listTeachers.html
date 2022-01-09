@@ -1,0 +1,57 @@
+<th:block xmlns:th="http://www.thymeleaf.org">
+    <section>
+        <div style="text-align: center">
+            <h1>Teachers</h1>
+
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Teacher</th>
+                    <th>Date of employment</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="teacher : ${teachers}">
+                    <td th:text="${teacher.getTeacherFullName().fullName()}"></td>
+                    <td th:text="${teacher.getDateOfEmployment()}"></td>
+                    <td>
+                        <th:block sec:authorize="hasRole('ADMIN')">
+                            <a type="button" class="btn btn-secondary" th:href="@{'/teachers/edit/{id}'(id=${teacher.getId()})} ">
+                                Edit
+                            </a>
+
+                            <form  th:action="@{'/teachers/delete/{id}' (id=${teacher.getId()})}" th:method="DELETE">
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                        </th:block>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <hr>
+            <!--    <div th:each="teacher : ${teachers}">-->
+
+            <!--        <p th:text="${teacher.getTeacherFullName().fullName()}"></p>-->
+
+            <!--        <a th:href="@{'/teachers/edit/{id}'(id=${teacher.getId()})} ">-->
+            <!--            <button>Edit</button>-->
+            <!--        </a>-->
+
+            <!--        <form  th:action="@{'/teachers/delete/{id}' (id=${teacher.getId()})}" th:method="DELETE">-->
+            <!--            <button type="submit">Delete</button>-->
+            <!--        </form>-->
+
+            <!--    </div>-->
+            <br>
+            <th:block sec:authorize="hasRole('ADMIN')">
+                <div class="row" style="margin:10px">
+                    <a class="btn btn-success" type="button" href="/teachers/add-new">Add new teacher</a>
+                </div>
+            </th:block>
+            <div class="row" style="margin:10px">
+                <a type="button" class="btn btn-info" href="/courses">Back to courses</a>
+            </div>
+        </div>
+    </section>
+</th:block>

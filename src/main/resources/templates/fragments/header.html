@@ -1,0 +1,25 @@
+<header xmlns:th="http://www.thymeleaf.org" style="margin-bottom:20px">
+    <div style="margin-top: 15px" class="container">
+        <div class="row">
+            <div class="col">
+                <a style="background:darkslategray;color:white" class="btn" href="/courses">Home page</a>
+            </div>
+            <div  style="text-align: center;font-weight:bold;color:darkblue;font-size:20px" class="col">
+                <th:block th:if="${#request.getRemoteUser()!=null}" th:text="${#request.getRemoteUser()}"></th:block>
+            </div>
+            <div style="text-align: center;" class="col">
+                <th:block sec:authorize="isAuthenticated()">
+                    <a class="btn" style="background:darkgreen;color:white" href="/logout">
+                        Logout
+                    </a>
+                </th:block>
+
+                <th:block sec:authorize="!isAuthenticated()">
+                    <a class="btn btn-dark" href="/login">
+                        Login
+                    </a>
+                </th:block>
+            </div>
+        </div>
+    </div>
+</header>

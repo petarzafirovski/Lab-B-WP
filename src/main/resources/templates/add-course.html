@@ -1,0 +1,55 @@
+<th:block xmlns:th="http://www.thymeleaf.org">
+    <section>
+        <div style="margin-top:20px;text-align: center">
+            <div class="row" th:if="${edit}">
+                <h3>Edit course</h3>
+            </div>
+            <div class="row" th:if="${add}">
+                <h3>Add new course</h3>
+            </div>
+        </div>
+        <form style="margin-top:35px" action="/courses/add" method="POST">
+            <div style="margin:7px">
+                <input name="hiddenId" type="hidden" th:value="${course} != null ? ${course.get().getCourse_Id()} : null">
+                <label for="name">Course name</label>
+                <input class="form-control" required type="text" id="name" name="name" th:value="${course} != null ? ${course.get().getName()} : ''">
+            </div>
+            <div style="margin:7px">
+                <label for="description">Course description</label>
+                <input class="form-control" required type="text" id="description" name="description" th:value="${course} != null ? ${course.get().getDescription()} : ''">
+            </div>
+            <div style="margin:7px">
+                <label for="type">Course Type</label>
+                <input type="text"
+                       class="form-control"
+                       id="type"
+                       name="type"
+                       required
+                       th:value="(${course} != null ? ${course.get().getType()} : '')"
+                       placeholder="Enter course type">
+
+            </div>
+            <div style="margin:7px">
+                <label>Teacher</label>
+                <select class="form-control" required name="teacherId">
+                    <option value="0"></option>
+                    <option th:if="${course!=null}"
+                            th:selected="${course.get().getTeacher() != null && course.get().getTeacher().getId() == teacher.getId()}"
+                            th:each="teacher : ${teachers}"
+                            th:text="${teacher.getTeacherFullName().fullName()}"
+                            th:value="${teacher.getId()}"
+                    ></option>
+                    <option th:if="${course==null}"
+                            th:each="teacher : ${teachers}"
+                            th:text="${teacher.getTeacherFullName().fullName()}"
+                            th:value="${teacher.getId()}"
+
+                    ></option>
+                </select>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-success">Add course</button>
+            <a type="button" class="btn btn-secondary"  href="/courses">Back</a>
+        </form>
+    </section>
+</th:block>

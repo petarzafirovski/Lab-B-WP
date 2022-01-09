@@ -1,0 +1,29 @@
+<th:block xmlns:th="http://www.thymeleaf.org">
+  <section>
+    <h3>Add grade</h3>
+    <form th:action="@{'/grades/'+${courseId}+'/add'}" method="POST">
+      <div>
+        <label>Select a student</label>
+        <select class="form-control" name="studentUsername">
+          <option value="0"></option>
+          <option
+                  th:each="student : ${students}"
+                  th:text="${student.getUsername()}"
+                  th:value="${student.getUsername()}"
+          ></option>
+        </select>
+      </div>
+      <label for="grade">Grade</label>
+      <input required class="form-control" type="text" name="grade" id="grade"> <br>
+      <label for="time">Time</label>
+      <input required class="form-control" type="datetime-local" name="time" id="time">
+      <input type="hidden" name="courseId" th:value="${courseId}">
+
+      <div class="row" style="margin:15px">
+        <button id="submit" type="submit" class="btn btn-primary" style="margin-right: 5px">Submit</button>
+        <a type="button"  th:href="@{'/grades/'+${courseId}}" class="btn btn-info">Back to grades list</a>
+      </div>
+
+    </form>
+  </section>
+</th:block>

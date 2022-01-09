@@ -1,0 +1,26 @@
+<th:block xmlns:th="http://www.thymeleaf.org">
+    <section>
+        <header>
+            <h1>Students in Course </h1>
+            <h3 th:text="${session.courseName}"></h3>
+        </header>
+        <br>
+            <div th:if="${session.isPresent}">
+                <h4 style="color: red">Student is already enrolled to this course</h4>
+            </div>
+        <br>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Student</th>
+            </tr>
+            </thead>
+            <tbody th:each="student : ${session.students}">
+            <tr>
+                <td th:text="${student.getName() }"></td>
+            </tr>
+            </tbody>
+        </table>
+        <a href="/addStudent" type="button" class="btn btn-info">Back</a>
+    </section>
+</th:block>

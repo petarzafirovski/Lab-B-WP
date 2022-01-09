@@ -1,0 +1,28 @@
+<th:block xmlns:th="http://www.thymeleaf.org">
+    <section>
+        <h2 th:text="${'Filtered grades between the dates from '} +${from} + ' to ' + ${to}"></h2>
+        <div th:if="${isEmpty}">
+            <h3 style="color: red">Grade list is empty for the given filtering interval.</h3>
+        </div>
+
+        <div th:if="grades!=null">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Student name</th>
+                    <th>Student grade</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="grade : ${grades}">
+                    <td th:text="${grade.student.name}"></td>
+                    <td th:text="${grade.grade}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+        <a type="button" class="btn btn-primary" th:href="@{'/grades/'+${courseId}}">Back to grades</a>
+    </section>
+</th:block>

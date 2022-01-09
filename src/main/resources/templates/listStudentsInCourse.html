@@ -1,0 +1,20 @@
+<th:block xmlns:th="http://www.thymeleaf.org">
+    <section>
+        <h3>Number of students in each course</h3>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Course name</th>
+                <th>Students</th>
+            </tr>
+            </thead>
+            <tbody th:each="course : ${courses}">
+            <tr>
+                <td th:text="${course.getName()}"></td>
+                <td th:text="${course.getStudents().size()}"></td>
+            </tr>
+            </tbody>
+        </table>
+        <a href="/addStudent" type="button" class="btn btn-info">Back</a>
+    </section>
+</th:block>

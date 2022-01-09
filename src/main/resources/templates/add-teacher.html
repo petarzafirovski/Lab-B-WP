@@ -1,0 +1,27 @@
+<th:block xmlns:th="http://www.thymeleaf.org">
+    <section>
+        <div class="row">
+            <div th:if="${add}">
+                <h3 >Add new teacher</h3>
+            </div>
+            <div th:if="${edit}">
+                <h3 >Edit teacher</h3>
+            </div>
+
+        </div>
+        <form action="/teachers/add" method="POST">
+            <div>
+                <input name="teacherId" type="hidden" th:value="${teacher} != null ? ${teacher.getId()} : null" class="form-control">
+                <label for="name">Teacher name</label>
+                <input required type="text" id="name" name="name" th:value="${teacher} != null ? ${teacher.getTeacherFullName().getName()} : ''" class="form-control"><br>
+                <label for="name">Teacher surname</label>
+                <input required type="text" id="surname" name="surname" th:value="${teacher} != null ? ${teacher.getTeacherFullName().getSurname()} : ''" class="form-control">
+                <label for="date">Date of employment</label>
+                <input required type="date" id="date" name="date" th:value="${teacher} != null ? ${teacher.getDateOfEmployment()} : ''" class="form-control">
+            </div>
+            <br>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <a type="button" class="btn btn-info" href="/teachers">Back to teachers</a>
+        </form>
+    </section>
+</th:block>

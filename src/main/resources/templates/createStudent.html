@@ -1,0 +1,19 @@
+<th:block xmlns:th="http://www.thymeleaf.org">
+    <header>
+    <h1>Student Enrollment - Create a New Student </h1>
+</header>
+    <section>
+        <form th:method="POST" th:action="@{/createStudent}">
+            <label for='username'>Username:</label><input required class="form-control" id='username' type='text' name='username'/><br/>
+
+            <label for='password'>Password:</label><input class="form-control" required id='password' type='password' name='password'/><br/>
+
+            <label for='name'>Name:</label><input required class="form-control" id='name' type='text' name='name'/><br/>
+
+            <label for='surname'>Surname:</label><input required class="form-control" id='surname' type='text' name='surname'/><br/>
+
+            <input class="btn btn-primary" type='submit' value='Submit' style="margin-right: 10px"/>
+            <a href="/addStudent" type="button" class="btn btn-info">Back</a>
+        </form>
+    </section>
+</th:block>
